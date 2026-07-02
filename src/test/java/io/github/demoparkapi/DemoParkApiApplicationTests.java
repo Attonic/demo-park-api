@@ -1,4 +1,4 @@
-package io.github.demo_park_api;
+package io.github.demoparkapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

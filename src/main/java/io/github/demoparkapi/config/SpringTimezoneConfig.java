@@ -1,4 +1,4 @@
-package io.github.demo_park_api.config;
+package io.github.demoparkapi.config;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;

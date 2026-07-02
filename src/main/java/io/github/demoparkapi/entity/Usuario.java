@@ -1,4 +1,4 @@
-package io.github.demo_park_api.entity;
+package io.github.demoparkapi.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

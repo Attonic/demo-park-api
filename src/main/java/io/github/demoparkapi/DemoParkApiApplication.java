@@ -1,4 +1,4 @@
-package io.github.demo_park_api;
+package io.github.demoparkapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
