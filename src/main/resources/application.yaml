@@ -1,0 +1,21 @@
+spring:
+
+  application:
+    name: demo-park-api
+  datasource:
+    username: "${DB_USERNAME}"
+    password: "${DB_PASSWORD}"
+    url: "${DB_URL}"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  web:
+    locale-resolver: fixed
+    locale: pt_BR
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
