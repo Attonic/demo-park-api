@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true, length = 100)
-    private String userName;
+    private String username;
 
     @Column(name = "password", nullable = false, length = 250)
     private String password;
