@@ -5,6 +5,7 @@ import io.github.demoparkapi.service.UsuarioService;
 import io.github.demoparkapi.web.dto.UsuarioCreateDto;
 import io.github.demoparkapi.web.dto.UsuarioMapper;
 import io.github.demoparkapi.web.dto.UsuarioResponseDto;
+import io.github.demoparkapi.web.dto.UsuarioSenhaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,11 +41,12 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> updatePassword(@PathVariable Long id, @RequestBody Usuario usuario) {
-        Usuario user = usuarioService.editarSenha(id, usuario.getPassword());
-        return ResponseEntity.ok(user);
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UsuarioSenhaDto dto) {
+        Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getSenhaAtual(), dto.getConfirmaSenha());
+        return ResponseEntity.noContent().build();
     }
 
+    @GetMapping
     public ResponseEntity<List<Usuario>> getAll() {
         List<Usuario> users = usuarioService.buscarTodos();
         return ResponseEntity.ok(users);
