@@ -2,6 +2,9 @@ package io.github.demoparkapi.web.controller;
 
 import io.github.demoparkapi.entity.Usuario;
 import io.github.demoparkapi.service.UsuarioService;
+import io.github.demoparkapi.web.dto.UsuarioCreateDto;
+import io.github.demoparkapi.web.dto.UsuarioMapper;
+import io.github.demoparkapi.web.dto.UsuarioResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +28,9 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
-        Usuario user = usuarioService.salvar(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    public ResponseEntity<UsuarioResponseDto> create(@RequestBody UsuarioCreateDto createDto){
+        Usuario user = usuarioService.salvar(UsuarioMapper.toUsuario(createDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioMapper.toDto(user));
     }
 
     @GetMapping("/{id}")
