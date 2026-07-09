@@ -1,7 +1,6 @@
 package io.github.demoparkapi.web.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
