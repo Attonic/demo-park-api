@@ -27,6 +27,11 @@ public class ApiExceptionHandler {
                 .body(new ErroMensage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campo(s) invalido(s)", result));
     }
 
-
+    public ResponseEntity<ErroMensage>  usernameUniqueViolationException(RuntimeException runtimeException, HttpServletRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErroMensage(request, HttpStatus.CONFLICT, "Campo(s) invalidos(s)"));
+    }
 
 }
