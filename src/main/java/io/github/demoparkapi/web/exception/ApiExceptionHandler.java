@@ -48,4 +48,12 @@ public class ApiExceptionHandler {
                 .body(new ErroMensage(request, HttpStatus.NOT_FOUND, runtimeException.getMessage()));
     }
 
+    public ResponseEntity<ErroMensage> PasswordInvalidException(RuntimeException runtimeException, HttpServletRequest request){
+
+        log.error("Api error - ", runtimeException);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                        .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErroMensage(request, HttpStatus.BAD_REQUEST, runtimeException.getMessage()));
+    }
 }

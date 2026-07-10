@@ -2,6 +2,7 @@ package io.github.demoparkapi.service;
 
 import io.github.demoparkapi.entity.Usuario;
 import io.github.demoparkapi.exception.EntityNotFoundException;
+import io.github.demoparkapi.exception.PasswordInvalidException;
 import io.github.demoparkapi.exception.UsernameUniqueViolationException;
 import io.github.demoparkapi.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -36,12 +37,12 @@ public class UsuarioService {
     @Transactional
     public Usuario editarSenha(Long id, String senhaAtual, String senhaNova, String confirmaSenha) {
         if (!senhaNova.equals(confirmaSenha)) {
-            throw new RuntimeException("Nova senha não confere com a confirmação de senha.");
+            throw new PasswordInvalidException("Nova senha não confere com a confirmação de senha.");
         }
 
         Usuario user = buscarPorId(id);
         if (!user.getPassword().equals(senhaAtual)){
-            throw new RuntimeException("Sua senha não confere.");
+            throw new PasswordInvalidException("Sua senha não confere.");
         }
         user.setPassword(senhaNova);
         return user;
