@@ -19,3 +19,11 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
+
+
+springdoc:
+  api-docs:
+    path: /docs-park
+  swagger-ui:
+    path: /docs-park.html
+  packages-to-scan: io.github.demoparkapi.web.controller
