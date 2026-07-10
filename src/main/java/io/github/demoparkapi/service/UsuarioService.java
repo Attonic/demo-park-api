@@ -1,6 +1,7 @@
 package io.github.demoparkapi.service;
 
 import io.github.demoparkapi.entity.Usuario;
+import io.github.demoparkapi.exception.EntityNotFoundException;
 import io.github.demoparkapi.exception.UsernameUniqueViolationException;
 import io.github.demoparkapi.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -29,7 +30,7 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Usuário id=%s não encontrado.", id)));
     }
 
     @Transactional

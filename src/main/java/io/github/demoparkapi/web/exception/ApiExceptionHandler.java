@@ -1,7 +1,9 @@
 package io.github.demoparkapi.web.exception;
 
+import io.github.demoparkapi.exception.UsernameUniqueViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,23 @@ public class ApiExceptionHandler {
                 .body(new ErroMensage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campo(s) invalido(s)", result));
     }
 
+    @ExceptionHandler(UsernameUniqueViolationException.class)
     public ResponseEntity<ErroMensage>  usernameUniqueViolationException(RuntimeException runtimeException, HttpServletRequest request) {
+
+        log.error("Api error - ", runtimeException);
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new ErroMensage(request, HttpStatus.CONFLICT, "Campo(s) invalidos(s)"));
+                .body(new ErroMensage(request, HttpStatus.CONFLICT, runtimeException.getMessage()));
+    }
+
+    public ResponseEntity<ErroMensage> EntityNotFoundException(RuntimeException runtimeException, HttpServletRequest request) {
+
+        log.error("Api Error - ", runtimeException);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErroMensage(request, HttpStatus.NOT_FOUND, runtimeException.getMessage()));
     }
 
 }
