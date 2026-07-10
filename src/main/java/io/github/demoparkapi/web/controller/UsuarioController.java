@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
@@ -60,7 +58,14 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(UsuarioMapper.toDto(user));
     }
 
-    @Operation(summary = "Busca usuário por ID.")
+    @Operation(summary = "Recuperar usuário por ID.",
+            responses = {
+                @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso.",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = UsuarioResponseDto.class))),
+                @ApiResponse(responseCode = "404", description = "Recurso não encontrado.",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class)))
+            }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponseDto> findById(@PathVariable Long id) {
         Usuario usuario = usuarioService.buscarPorId(id);
